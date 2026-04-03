@@ -1,0 +1,24 @@
+node_modules
+out
+.idea
+node_modules
+.DS_Store
+Thumbs.db
+*.log
+
+/dist
+/temp
+
+# ignore everything in 'app' folder what had been generated from 'src' folder
+/app/app.js
+/app/modal.js
+/app/background.js
+/app/preload.js
+/app/preloadModal.js
+/app/receipt.js
+/app/**/*.map
+/app/*.ttf
+/app/*.woff
+/app/*.woff2
+/app/*.svg
+/app/*.eot
