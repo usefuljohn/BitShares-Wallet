@@ -1220,21 +1220,35 @@ if (currentOS === "win32" || currentOS === "linux") {
 
             mainWindow.focus();
 
-            let deeplink;
-            try {
-                deeplink = argv.at(-1);
-            } catch (error) {
-                console.log(error);
-                return;
-            }
-
-            let deeplinkingUrl;
             const prefixes = [
                 "bitshares://api/",
                 "rawbitshares://api/",
                 "vaulta://api/",
-                "rawvaulta://api/"
+                "rawvaulta://api/",
+                "beeteos://api/",
+                "rawbeeteos://api/",
+                "beet://api/",
+                "rawbeet://api/",
+                "bitshares://api",
+                "rawbitshares://api",
+                "vaulta://api",
+                "rawvaulta://api",
+                "beeteos://api",
+                "rawbeeteos://api",
+                "beet://api",
+                "rawbeet://api"
             ];
+
+            let deeplink = argv.find(arg => {
+                return prefixes.some(prefix => arg.includes(prefix));
+            });
+
+            if (!deeplink) {
+                console.log("No deep link prefix found in second-instance arguments.");
+                return;
+            }
+
+            let deeplinkingUrl;
             for (const prefix of prefixes) {
                 if (deeplink.includes(prefix)) {
                     deeplinkingUrl = deeplink.split(prefix)[1];
@@ -1259,27 +1273,34 @@ if (currentOS === "win32" || currentOS === "linux") {
         });
 
         let defaultPath;
-        try {
-            defaultPath = path.resolve(process.argv[1]);
-        } catch (error) {
-            console.log(error);
+        if (process.argv && process.argv.length >= 2 && typeof process.argv[1] === "string") {
+            try {
+                defaultPath = path.resolve(process.argv[1]);
+            } catch (error) {
+                console.log(error);
+            }
         }
 
-        app.setAsDefaultProtocolClient("bitshares", process.execPath, [
-            defaultPath,
-        ]);
+        const protocols = [
+            "bitshares",
+            "rawbitshares",
+            "beeteos",
+            "rawbeeteos",
+            "beet",
+            "rawbeet",
+            "vaulta",
+            "rawvaulta"
+        ];
 
-        app.setAsDefaultProtocolClient("rawbitshares", process.execPath, [
-            defaultPath,
-        ]);
-
-        app.setAsDefaultProtocolClient("vaulta", process.execPath, [
-            defaultPath,
-        ]);
-
-        app.setAsDefaultProtocolClient("rawvaulta", process.execPath, [
-            defaultPath,
-        ]);
+        for (const protocol of protocols) {
+            if (defaultPath) {
+                app.setAsDefaultProtocolClient(protocol, process.execPath, [
+                    defaultPath,
+                ]);
+            } else {
+                app.setAsDefaultProtocolClient(protocol);
+            }
+        }
 
         app.whenReady().then(() => {
             createWindow();
@@ -1288,6 +1309,10 @@ if (currentOS === "win32" || currentOS === "linux") {
 } else {
     app.setAsDefaultProtocolClient("bitshares");
     app.setAsDefaultProtocolClient("rawbitshares");
+    app.setAsDefaultProtocolClient("beeteos");
+    app.setAsDefaultProtocolClient("rawbeeteos");
+    app.setAsDefaultProtocolClient("beet");
+    app.setAsDefaultProtocolClient("rawbeet");
     app.setAsDefaultProtocolClient("vaulta");
     app.setAsDefaultProtocolClient("rawvaulta");
 
@@ -1310,7 +1335,19 @@ if (currentOS === "win32" || currentOS === "linux") {
             "bitshares://api/",
             "rawbitshares://api/",
             "vaulta://api/",
-            "rawvaulta://api/"
+            "rawvaulta://api/",
+            "beeteos://api/",
+            "rawbeeteos://api/",
+            "beet://api/",
+            "rawbeet://api/",
+            "bitshares://api",
+            "rawbitshares://api",
+            "vaulta://api",
+            "rawvaulta://api",
+            "beeteos://api",
+            "rawbeeteos://api",
+            "beet://api",
+            "rawbeet://api"
         ];
         for (const prefix of prefixes) {
             if (urlString.includes(prefix)) {
