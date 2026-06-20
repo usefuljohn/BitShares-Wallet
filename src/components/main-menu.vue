@@ -93,7 +93,7 @@
             clearTimeout(logoutTimer);
         }
 
-        const minutes = store.getters['SettingsStore/getAutoLockMinutes'] || 2;
+        const minutes = store.getters['SettingsStore/getAutoLockMinutes'] || 10;
         logoutTimer = setTimeout(() => {
             console.log("wallet timed logout");
             store.dispatch("WalletStore/logout");

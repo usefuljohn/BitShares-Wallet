@@ -32,8 +32,8 @@ import { getSignature } from "./lib/SecureRemote.js";
 import * as Actions from "./lib/Actions.js";
 import getBlockchainAPI from "./lib/blockchains/blockchainFactory.js";
 import BTSWalletHandler from "./lib/blockchains/bitshares/BTSWalletHandler.js";
-// BeetServer kept for future use, not imported currently
-// import BeetServer from "./lib/BeetServer.js";
+// BeetServer re-enabled for dApp socket connections (signMessage, etc.)
+import BeetServer from "./lib/BeetServer.js";
 
 import { inject } from "./lib/inject.js";
 
@@ -511,7 +511,13 @@ const createWindow = async () => {
         tray.popUpContextMenu(contextMenu);
     });
 
-    // WWW server handlers removed — BeetServer kept for future use
+    // Start Socket.IO server for dApp connections (HTTP-only on port 60555)
+    try {
+        await BeetServer.initialize(60554, 60555, null, null, mainWindow.webContents);
+        console.log("BeetServer initialized on ports 60554/60555");
+    } catch (error) {
+        console.error("BeetServer initialization failed:", error);
+    }
 
     ipcMain.handle("memoFromBuffer", async (event, arg) => {
         const { msg } = arg;

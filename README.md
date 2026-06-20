@@ -106,12 +106,17 @@ BitShares Wallet registers the following protocol handlers for receiving transac
 | `rawbitshares://` | BTS, BTS_TEST | Raw (unencrypted) BitShares deeplinks |
 | `vaulta://` | EOS, BEOS, TLOS | Standard Vaulta/EOS-family deeplinks |
 | `rawvaulta://` | EOS, BEOS, TLOS | Raw (unencrypted) Vaulta/EOS-family deeplinks |
+| `beeteos://` | EOS, BEOS, TLOS | Legacy BeetEOS-compatible deeplinks |
+| `rawbeeteos://` | EOS, BEOS, TLOS | Raw (unencrypted) BeetEOS-compatible deeplinks |
+| `beet://` | BTS, BTS_TEST | Legacy Beet-compatible deeplinks |
+| `rawbeet://` | BTS, BTS_TEST | Raw (unencrypted) Beet-compatible deeplinks |
 
 #### Deeplink Format
 
 ```
 rawbitshares://api?chain=BTS&request=ENCODED_JSON
 rawvaulta://api?chain=EOS&request=ENCODED_JSON
+rawbeeteos://api?chain=EOS&request=ENCODED_JSON
 ```
 
 The `request` parameter is a URL-encoded JSON object containing the transaction payload. See `src/scripts/EOS/` for example deeplink generation scripts.

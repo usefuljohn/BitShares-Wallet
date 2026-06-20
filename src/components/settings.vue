@@ -13,8 +13,18 @@
     let passincorrect = ref("");
 
     let autoLockMinutes = ref(
-        store.getters['SettingsStore/getAutoLockMinutes'] || 2
+        store.getters['SettingsStore/getAutoLockMinutes'] || 10
     );
+
+    let autoLockLabel = computed(() => {
+        const m = autoLockMinutes.value;
+        if (m >= 60) {
+            const h = Math.floor(m / 60);
+            const r = m % 60;
+            return r > 0 ? `${h}h ${r}min` : `${h}h`;
+        }
+        return `${m} min`;
+    });
 
     let selectedAccount = computed(() => {
         if (!store.state.WalletStore.isUnlocked) {
@@ -98,13 +108,13 @@
                     id="autoLockSlider"
                     type="range"
                     min="1"
-                    max="30"
+                    max="120"
                     :value="autoLockMinutes"
                     style="width: 200px; cursor: pointer;"
                     @input="updateAutoLock"
                 />
-                <span style="font-weight: bold; min-width: 60px;">
-                    {{ autoLockMinutes }} min
+                <span style="font-weight: bold; min-width: 80px;">
+                    {{ autoLockLabel }}
                 </span>
             </div>
         </ui-card>

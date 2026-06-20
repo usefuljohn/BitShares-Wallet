@@ -189,7 +189,7 @@ const getters = {
     },
     getAutoLockMinutes: (state) => {
         if (!Object.prototype.hasOwnProperty.call(state.settings, 'autoLockMinutes')) {
-            return 2;
+            return 10;
         }
         return state.settings.autoLockMinutes;
     }
@@ -199,7 +199,7 @@ const initialState = {
     settings: {
         locale: defaultLocale,
         selected_node: {},
-        autoLockMinutes: 2,
+        autoLockMinutes: 10,
         chainPermissions: {
             BTS: [],
             TEST: [],
