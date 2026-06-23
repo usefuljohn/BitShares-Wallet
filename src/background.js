@@ -1231,18 +1231,10 @@ if (currentOS === "win32" || currentOS === "linux") {
                 "rawbitshares://api/",
                 "vaulta://api/",
                 "rawvaulta://api/",
-                "beeteos://api/",
-                "rawbeeteos://api/",
-                "beet://api/",
-                "rawbeet://api/",
                 "bitshares://api",
                 "rawbitshares://api",
                 "vaulta://api",
-                "rawvaulta://api",
-                "beeteos://api",
-                "rawbeeteos://api",
-                "beet://api",
-                "rawbeet://api"
+                "rawvaulta://api"
             ];
 
             let deeplink = argv.find(arg => {
@@ -1290,10 +1282,6 @@ if (currentOS === "win32" || currentOS === "linux") {
         const protocols = [
             "bitshares",
             "rawbitshares",
-            "beeteos",
-            "rawbeeteos",
-            "beet",
-            "rawbeet",
             "vaulta",
             "rawvaulta"
         ];
@@ -1315,10 +1303,6 @@ if (currentOS === "win32" || currentOS === "linux") {
 } else {
     app.setAsDefaultProtocolClient("bitshares");
     app.setAsDefaultProtocolClient("rawbitshares");
-    app.setAsDefaultProtocolClient("beeteos");
-    app.setAsDefaultProtocolClient("rawbeeteos");
-    app.setAsDefaultProtocolClient("beet");
-    app.setAsDefaultProtocolClient("rawbeet");
     app.setAsDefaultProtocolClient("vaulta");
     app.setAsDefaultProtocolClient("rawvaulta");
 
@@ -1342,18 +1326,10 @@ if (currentOS === "win32" || currentOS === "linux") {
             "rawbitshares://api/",
             "vaulta://api/",
             "rawvaulta://api/",
-            "beeteos://api/",
-            "rawbeeteos://api/",
-            "beet://api/",
-            "rawbeet://api/",
             "bitshares://api",
             "rawbitshares://api",
             "vaulta://api",
-            "rawvaulta://api",
-            "beeteos://api",
-            "rawbeeteos://api",
-            "beet://api",
-            "rawbeet://api"
+            "rawvaulta://api"
         ];
         for (const prefix of prefixes) {
             if (urlString.includes(prefix)) {

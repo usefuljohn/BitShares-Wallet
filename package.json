@@ -1,7 +1,7 @@
 {
   "name": "bitshares-wallet",
   "productName": "BitShares Wallet",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "apiversion": 3,
   "description": "BitShares Wallet is a stand-alone key-manager and signing app for BitShares and EOS based blockchains.",
   "author": "usefuljohn <usefuljohn@example.com>",
@@ -49,11 +49,7 @@
         "x-scheme-handler/bitshares",
         "x-scheme-handler/rawbitshares",
         "x-scheme-handler/vaulta",
-        "x-scheme-handler/rawvaulta",
-        "x-scheme-handler/beeteos",
-        "x-scheme-handler/rawbeeteos",
-        "x-scheme-handler/beet",
-        "x-scheme-handler/rawbeet"
+        "x-scheme-handler/rawvaulta"
       ],
       "desktop": {
         "exec": "bitshares-wallet %U"
