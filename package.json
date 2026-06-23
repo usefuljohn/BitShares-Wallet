@@ -1,7 +1,7 @@
 {
   "name": "bitshares-wallet",
   "productName": "BitShares Wallet",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "apiversion": 3,
   "description": "BitShares Wallet is a stand-alone key-manager and signing app for BitShares and EOS based blockchains.",
   "author": "usefuljohn <usefuljohn@example.com>",
