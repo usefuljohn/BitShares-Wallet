@@ -408,6 +408,9 @@ export function useSigningHandlers(store, t, hexToString) {
                     }
 
                     let _requiredMemoKey = store.getters["AccountStore/getPrivateMemoKey"](fromID, chain);
+                    if (!_requiredMemoKey) {
+                        _requiredMemoKey = store.getters["AccountStore/getCurrentActiveKey"]();
+                    }
                     
                     let processedKey;
                     try {
@@ -552,13 +555,16 @@ export function useSigningHandlers(store, t, hexToString) {
                 let activeKey;
                 if (["BTS", "BTS_TEST"].includes(chain)) {
                     try {
-                        activeKey = request.payload.account_id
+                        activeKey = (request.payload && request.payload.account_id)
                             ? store.getters["AccountStore/getActiveKey"](
                                 request
                             )
                             : store.getters[
                                 "AccountStore/getCurrentActiveKey"
                             ]();
+                        if (!activeKey) {
+                            activeKey = store.getters["AccountStore/getCurrentActiveKey"]();
+                        }
                     } catch (error) {
                         console.log(error);
                         window.electron.injectedCallError({
@@ -715,13 +721,16 @@ export function useSigningHandlers(store, t, hexToString) {
                         let activeKey;
                         if (["BTS", "BTS_TEST"].includes(chain)) {
                             try {
-                                activeKey = request.payload.account_id
+                                activeKey = (request.payload && request.payload.account_id)
                                     ? store.getters[
                                         "AccountStore/getActiveKey"
                                     ](request)
                                     : store.getters[
                                         "AccountStore/getCurrentActiveKey"
                                     ]();
+                                if (!activeKey) {
+                                    activeKey = store.getters["AccountStore/getCurrentActiveKey"]();
+                                }
                             } catch (error) {
                                 console.log(error);
                                 window.electron.requestSignatureError({

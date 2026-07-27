@@ -205,15 +205,19 @@ const getters = {
         return currentAccount.keys.privateKey;
     },
     getActiveKey: (state) => (request) => {
-      let signing = state.accountlist.filter(account => {
-          return (
-              account.accountID == request.payload.account_id &&
-              account.chain == request.payload.chain
-          );
-      });
+      let signing = [];
+      if (request && request.payload && request.payload.account_id) {
+          signing = state.accountlist.filter(account => {
+              return (
+                  account.accountID == request.payload.account_id &&
+                  account.chain == request.payload.chain
+              );
+          });
+      }
 
       if (!signing || !signing.length) {
-          return;
+          let currentAccount = state.accountlist[state.selectedIndex];
+          return currentAccount ? currentAccount.keys.active : undefined;
       }
 
       return signing.slice()[0].keys.active;
