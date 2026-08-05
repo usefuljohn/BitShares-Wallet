@@ -1,9 +1,9 @@
 {
   "name": "bitshares-wallet",
-  "productName": "BitShares Wallet",
+  "productName": "BitShares Keychain",
   "version": "0.1.3",
   "apiversion": 3,
-  "description": "BitShares Wallet is a stand-alone key-manager and signing app for BitShares and EOS based blockchains.",
+  "description": "BitShares Keychain is a stand-alone key-manager and signing app for BitShares and EOS based blockchains.",
   "author": "usefuljohn <usefuljohn@example.com>",
   "license": "MIT",
   "homepage": "https://github.com/usefuljohn/BitShares-Wallet#readme",
@@ -22,7 +22,7 @@
   },
   "build": {
     "appId": "io.bitshares.wallet",
-    "productName": "BitShares Wallet",
+    "productName": "BitShares Keychain",
     "artifactName": "BitSharesWalletSetup.${ext}",
     "files": [
       "app/**/*",

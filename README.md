@@ -1,4 +1,4 @@
-# BitShares Wallet
+# BitShares Keychain
 
 A stand-alone key-manager and transaction signing application for BitShares and EOS-based blockchains.
 
@@ -34,7 +34,7 @@ npm run dist
 
 ## Setting Up with a BitShares Private Active Key
 
-BitShares Wallet stores your private keys locally, encrypted with a wallet password you choose during setup. The **active key** is the authority required to sign transactions (transfers, limit orders, liquidity pool operations, etc.) on the BitShares blockchain.
+BitShares Keychain stores your private keys locally, encrypted with a wallet password you choose during setup. The **active key** is the authority required to sign transactions (transfers, limit orders, liquidity pool operations, etc.) on the BitShares blockchain.
 
 ### Import Methods for BitShares
 
@@ -52,7 +52,7 @@ This is the standard method for most BitShares accounts. The wallet derives your
 
 **Steps:**
 
-1. Launch BitShares Wallet and click **"Create a new wallet"** (or **"Add Account"** from the dashboard)
+1. Launch BitShares Keychain and click **"Create a new wallet"** (or **"Add Account"** from the dashboard)
 2. Enter a **wallet name** (this is a local label, not your blockchain account name)
 3. Select **BitShares (BTS)** as the chain
 4. Choose **"Using cloud password"** as the import method
@@ -98,7 +98,7 @@ This method imports **only** the memo private key, which allows you to decrypt i
 
 ## Deeplink Protocols
 
-BitShares Wallet registers the following protocol handlers for receiving transaction signing requests from external applications:
+BitShares Keychain registers the following protocol handlers for receiving transaction signing requests from external applications:
 
 | Protocol | Chain | Description |
 |----------|-------|-------------|

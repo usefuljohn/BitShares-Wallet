@@ -15,6 +15,18 @@ const mutations = {
     }
 };
 
+const defaultTrackedAssets = [
+    'BTS',
+    'TWENTIX',
+    'BTWTY',
+    'BTWTY.EOS',
+    'BTWTY.BTC',
+    'IOB.XRP',
+    'IOB.XLM',
+    'XBTSX.BTC',
+    'XBTSX.LTC'
+];
+
 const actions = {
     loadSettings({
         commit
@@ -23,10 +35,14 @@ const actions = {
             try {
                 BeetDB.settings.get({id: 'settings'}).then((settings) => {
                     if (settings && settings.length > 0) {
-                        commit(LOAD_SETTINGS, JSON.parse(settings));
+                        const parsed = JSON.parse(settings);
+                        if (!parsed.trackedAssets) {
+                            parsed.trackedAssets = defaultTrackedAssets;
+                        }
+                        commit(LOAD_SETTINGS, parsed);
                     } else {
                         BeetDB.settings.put({id: 'settings', value: JSON.stringify(initialState.settings)}).then(() => {
-                            commit(LOAD_SETTINGS, JSON.parse(initialState.settings));
+                            commit(LOAD_SETTINGS, initialState.settings);
                         })
                     }
                 });
@@ -169,6 +185,64 @@ const actions = {
                 reject(error);
             });
         });
+    },
+    addTrackedAsset({
+        commit
+    }, payload) {
+        return new Promise(async (resolve, reject) => {
+            BeetDB.settings.get({id: 'settings'}).then((settings) => {
+                if (settings && settings.length > 0) {
+                    settings = JSON.parse(settings);
+                } else {
+                    settings = initialState.settings;
+                }
+
+                if (!settings.trackedAssets) {
+                    settings.trackedAssets = [...defaultTrackedAssets];
+                }
+
+                const assetSymbol = payload.symbol.trim().toUpperCase();
+                if (assetSymbol && !settings.trackedAssets.includes(assetSymbol)) {
+                    settings.trackedAssets.push(assetSymbol);
+                }
+
+                BeetDB.settings.put({id: 'settings', value: JSON.stringify(settings)}).then(() => {
+                    commit(LOAD_SETTINGS, settings);
+                    resolve();
+                });
+            }).catch((error) => {
+                console.log(`addTrackedAsset: ${error}`);
+                reject(error);
+            });
+        });
+    },
+    removeTrackedAsset({
+        commit
+    }, payload) {
+        return new Promise(async (resolve, reject) => {
+            BeetDB.settings.get({id: 'settings'}).then((settings) => {
+                if (settings && settings.length > 0) {
+                    settings = JSON.parse(settings);
+                } else {
+                    settings = initialState.settings;
+                }
+
+                if (!settings.trackedAssets) {
+                    settings.trackedAssets = [...defaultTrackedAssets];
+                }
+
+                const assetSymbol = payload.symbol.trim().toUpperCase();
+                settings.trackedAssets = settings.trackedAssets.filter(s => s !== assetSymbol);
+
+                BeetDB.settings.put({id: 'settings', value: JSON.stringify(settings)}).then(() => {
+                    commit(LOAD_SETTINGS, settings);
+                    resolve();
+                });
+            }).catch((error) => {
+                console.log(`removeTrackedAsset: ${error}`);
+                reject(error);
+            });
+        });
     }
 }
 
@@ -192,6 +266,12 @@ const getters = {
             return 10;
         }
         return state.settings.autoLockMinutes;
+    },
+    getTrackedAssets: (state) => {
+        if (!Object.prototype.hasOwnProperty.call(state.settings, 'trackedAssets') || !state.settings.trackedAssets) {
+            return defaultTrackedAssets;
+        }
+        return state.settings.trackedAssets;
     }
 };
 
@@ -200,6 +280,7 @@ const initialState = {
         locale: defaultLocale,
         selected_node: {},
         autoLockMinutes: 10,
+        trackedAssets: defaultTrackedAssets,
         chainPermissions: {
             BTS: [],
             TEST: [],

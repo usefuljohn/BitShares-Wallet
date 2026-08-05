@@ -153,7 +153,7 @@ const createModal = async (arg, modalEvent) => {
 
     modalWindows[id] = new BrowserWindow({
         parent: mainWindow,
-        title: "BitShares Wallet",
+        title: "BitShares Keychain",
         width: modalWidth,
         height: modalHeight,
         minWidth: modalWidth,
@@ -241,7 +241,7 @@ const createReceipt = async (arg, modalEvent) => {
 
     receiptWindows[id] = new BrowserWindow({
         parent: mainWindow,
-        title: "BitShares Wallet",
+        title: "BitShares Keychain",
         width: modalWidth,
         height: modalHeight,
         minWidth: modalWidth,
@@ -505,7 +505,7 @@ const createWindow = async () => {
             },
         },
     ]);
-    tray.setToolTip("BitShares Wallet");
+    tray.setToolTip("BitShares Keychain");
 
     tray.on("right-click", (event, bounds) => {
         tray.popUpContextMenu(contextMenu);

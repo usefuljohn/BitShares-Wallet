@@ -8,7 +8,7 @@ ELECTRON_PATH="$PROJECT_DIR/node_modules/electron/dist/electron"
 ICON_PATH="$PROJECT_DIR/resources/icons/512x512.png"
 DESKTOP_FILE="$HOME/.local/share/applications/bitshares-wallet.desktop"
 
-echo "=== BitShares Wallet Deeplink Handler Registration ==="
+echo "=== BitShares Keychain Deeplink Handler Registration ==="
 echo ""
 
 # Choose running target
@@ -49,15 +49,15 @@ fi
 echo "Creating desktop file at $DESKTOP_FILE..."
 cat <<EOF > "$DESKTOP_FILE"
 [Desktop Entry]
-Name=BitShares Wallet
-Comment=BitShares Wallet is a stand-alone key-manager and signing app for BitShares and EOS based blockchains.
+Name=BitShares Keychain
+Comment=BitShares Keychain is a stand-alone key-manager and signing app for BitShares and EOS based blockchains.
 Exec=$EXEC_CMD
 Terminal=false
 Type=Application
 Icon=$ICON_PATH
 MimeType=x-scheme-handler/bitshares;x-scheme-handler/rawbitshares;x-scheme-handler/vaulta;x-scheme-handler/rawvaulta;
 Categories=Utility;
-StartupWMClass=BitShares Wallet
+StartupWMClass=BitShares Keychain
 EOF
 
 chmod +x "$DESKTOP_FILE"
@@ -89,4 +89,4 @@ done
 echo "Updating desktop database..."
 update-desktop-database "$HOME/.local/share/applications/"
 
-echo "Registration complete! The new BitShares Wallet is now configured as the default handler for all deep link schemes."
+echo "Registration complete! The new BitShares Keychain is now configured as the default handler for all deep link schemes."

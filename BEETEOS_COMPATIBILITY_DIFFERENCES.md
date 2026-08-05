@@ -1,6 +1,6 @@
-# Comparison & Compatibility: BitShares Wallet vs. BeetEOS
+# Comparison & Compatibility: BitShares Keychain vs. BeetEOS
 
-This document details the modifications, alignments, and architectural differences between **BitShares Wallet** and the upstream **BeetEOS** client, specifically focusing on PMA (Prediction Market Asset) tool compatibility and general feature parity.
+This document details the modifications, alignments, and architectural differences between **BitShares Keychain** and the upstream **BeetEOS** client, specifically focusing on PMA (Prediction Market Asset) tool compatibility and general feature parity.
 
 ---
 
@@ -19,14 +19,14 @@ Both wallets share the same database schemas, encryption models, and transaction
 
 To prevent OS-level protocol hijacking and registration conflicts when multiple wallets are installed simultaneously:
 *   **BeetEOS** registers and handles `beeteos://` and `rawbeeteos://` schemes.
-*   **BitShares Wallet** registers and handles **only** its own unique schemes: `bitshares://`, `rawbitshares://`, `vaulta://`, and `rawvaulta://`.
-*   Both wallets use the exact same background parser (`_parseDeeplink`) and UI raw-link handler (`raw-link.vue`) to sign and broadcast the payload. Any third-party dApp or tool targeting BitShares Wallet must call it using the `bitshares://` scheme.
+*   **BitShares Keychain** registers and handles **only** its own unique schemes: `bitshares://`, `rawbitshares://`, `vaulta://`, and `rawvaulta://`.
+*   Both wallets use the exact same background parser (`_parseDeeplink`) and UI raw-link handler (`raw-link.vue`) to sign and broadcast the payload. Any third-party dApp or tool targeting BitShares Keychain must call it using the `bitshares://` scheme.
 
 ---
 
-## 3. Key Enhancements in BitShares Wallet
+## 3. Key Enhancements in BitShares Keychain
 
-BitShares Wallet includes critical stability fixes and UX enhancements not present in BeetEOS:
+BitShares Keychain includes critical stability fixes and UX enhancements not present in BeetEOS:
 
 *   **Improved Auto-Lock Timeout**: 
     *   Default inactivity lock-out time extended from **2 minutes to 10 minutes**.
@@ -41,8 +41,8 @@ BitShares Wallet includes critical stability fixes and UX enhancements not prese
 
 ## 4. Omitted Features (BeetEOS Only)
 
-To keep BitShares Wallet streamlined and focused on secure local/deeplink workflows, the following upstream experimental features were intentionally left out:
+To keep BitShares Keychain streamlined and focused on secure local/deeplink workflows, the following upstream experimental features were intentionally left out:
 
 *   **QR Code Handling**: `qr.vue` and the corresponding `processQR` background handler.
 *   **TOTP Authenticator**: `totp.vue`, `totpCode`, and `totpDeeplink` API methods.
-*   **dApp Socket.IO Controls**: Manual socket server management buttons (BitShares Wallet auto-starts the Socket.IO server on boot).
+*   **dApp Socket.IO Controls**: Manual socket server management buttons (BitShares Keychain auto-starts the Socket.IO server on boot).

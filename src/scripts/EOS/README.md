@@ -10,7 +10,7 @@ For more info on how to construct an EOS blockchain based operation, [check thes
 
 Install node.js on your computer, consider using [nvm](https://github.com/nvm-sh/nvm#install--update-script) to do so, unless you'd prefer to [install it via a package manger](https://nodejs.org/en/download/package-manager).
 
-Once installed, launch a terminal command prompt and navigate to the BitShares Wallet folder and enter the following command:
+Once installed, launch a terminal command prompt and navigate to the BitShares Keychain folder and enter the following command:
 ```
 npm install
 ```
@@ -29,7 +29,7 @@ rawvaulta://api?chain=EOS&request=DATA
 
 Copy the entire URL and paste it into a web browser URL bar & hit enter.
 
-The web browser should now prompt you to "open electron", do so and your BitShares Wallet will process the prompt and launch a prompt for you to verify the contents of the multi action transaction, which if approved will attempt to broadcast the operation.
+The web browser should now prompt you to "open electron", do so and your BitShares Keychain will process the prompt and launch a prompt for you to verify the contents of the multi action transaction, which if approved will attempt to broadcast the operation.
 
 If you requested a receipt but it doesn't show, then that means your operation was not successfully broadcast onto your blockchain of choice.
 

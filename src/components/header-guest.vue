@@ -19,7 +19,7 @@
                     height="150"
                 >
                 <div class="beet-typo">
-                    BitShares Wallet
+                    BitShares Keychain
                 </div>
                 <h3 class="h3">
                     {{ t("common.welcome" ) }}

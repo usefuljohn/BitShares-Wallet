@@ -22,7 +22,7 @@
                     alt
                 >
                 <h4 class="h4 beet-typo-small">
-                    BitShares Wallet
+                    BitShares Keychain
                 </h4>
             </ui-grid-cell>
         </ui-grid>
